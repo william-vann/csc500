@@ -1,1 +1,5 @@
-# csc500
+# csc500 
+
+# Module 1: Critical Thinking Assignment 
+
+# William Vann
