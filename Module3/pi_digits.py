@@ -1,6 +1,6 @@
 import array as arr
 
-pi = '''
+pi_str = '''
 3.1415926535 8979323846 2643383279 5028841971 6939937510
   5820974944 5923078164 0628620899 8628034825 3421170679
   8214808651 3282306647 0938446095 5058223172 5359408128
@@ -222,12 +222,14 @@ pi = '''
   4610126483 6999892256 9596881592 0560010165 5256375679
 '''
 
-pi_digits = pi.replace('3.','').replace('\n', '').replace(' ', '')
+pi_digits = pi_str.replace('3.', '').replace('\n', '').replace(' ', '')
 
-# print(pi_digits)
 
 pi_digits_array = arr.array('B', [int(digit) for digit in pi_digits])
 
-num_digits = int(input("Enter the number of digits of pi to store: "))
-print(pi_digits_array.itemsize)
-print(pi_digits_array[:num_digits])
+
+num_digits = int(input("Enter the number of digits of pi to display: "))
+
+
+print(f'Bytes per digit: {pi_digits_array.itemsize}')
+print(f'{num_digits} digits in the array: \n {pi_digits_array[:num_digits]}')
