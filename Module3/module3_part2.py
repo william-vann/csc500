@@ -1,9 +1,10 @@
 # Module 3 - Part 2 
 
+# Get user inputs
 time_now = int(input('Enter time now (0-23): '))
 hours_to_alarm = int(input('Enter hours until alarm: '))
 
-
+# Define 24 hour clock dictionary
 clock_24hour = {
     0: (0, '12am (midnight)', 'o zero hundred'), 
     1: (1, '1am', 'o one hundred'),
@@ -33,6 +34,9 @@ clock_24hour = {
 
 print('Current time:', clock_24hour[time_now])
 
+# Calculate alarm time using modulo
 alarm_time = clock_24hour[(time_now + hours_to_alarm) % 24]
 
-print(f'Alarm will sound in {hours_to_alarm} hours at {alarm_time}')
+# Display the results
+print(f'Alarm will sound in {hours_to_alarm} hours')
+print(f'That will be at: {alarm_time[0]} hours, aka {alarm_time[1]}, or, militarily, {alarm_time[2]}')
