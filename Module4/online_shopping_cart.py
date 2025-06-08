@@ -2,22 +2,8 @@
 # Module 4 Portfolio Milestone
 # Online Shopping Cart
 
-# Step 1: Create ItemToPurchase class
-'''
-Attributes
-    item_name (string)
-    item_price (float)
-    item_quantity (int)
 
-Default constructor
-    Initializes item's name = "none", item's price = 0, item's quantity = 0
 
-Method
-    print_item_cost()
-
-Example of print_item_cost() output:
-Bottled Water 10 @ $1 = $10
-'''
 
 class ItemToPurchase:
     def __init__(self, item_name='none', item_price=0.0, item_quantity=0):
