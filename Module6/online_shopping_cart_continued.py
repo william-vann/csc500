@@ -29,18 +29,18 @@ def get_user_input():
     return item_name, item_price, item_quantity
 
 # Create 2 objects from ItemToPurchase class, unpack user inputs
-item1 = ItemToPurchase(*get_user_input())
-item2 = ItemToPurchase(*get_user_input())
+# item1 = ItemToPurchase(*get_user_input())
+# item2 = ItemToPurchase(*get_user_input())
 
 
 #############################################
 # STEP 3
 #############################################
 # Output results
-print(f'TOTAL COST')
-item1.print_item_cost()
-item2.print_item_cost()
-print(f'Total: ${(item1.transaction_cost + item2.transaction_cost):.2f}')
+# print(f'TOTAL COST')
+# item1.print_item_cost()
+# item2.print_item_cost()
+# print(f'Total: ${(item1.transaction_cost + item2.transaction_cost):.2f}')
 
 #############################################
 # STEP 4
@@ -59,7 +59,7 @@ class OnlineShoppingCart():
         self.cart_items.append(ItemToPurchase)
 
     # Remove item method
-    def remove_item(self, ItemToPurchase.item_name):
+    def remove_item(self, ItemToPurchase):
         if ItemToPurchase.item_name not in self.cart_items:
             print(f'Item not found in cart. Nothing removed.')
         else:
@@ -98,7 +98,7 @@ class OnlineShoppingCart():
 
 # Implement print_menu() function
 
-def print_menu(ShoppingCart):
+def print_menu(OnlineShoppingCart):
     pass
 
 
@@ -109,13 +109,13 @@ def print_menu(ShoppingCart):
 
 # Implement output_shopping_cart__menu() function
 
-def output_shopping_cart_menu(ShoppingCart):
+def output_shopping_cart_menu(OnlineShoppingCart):
     pass
 
 #############################################
 # MAIN
 #############################################
 
-def main()
+def main():
     pass
 
