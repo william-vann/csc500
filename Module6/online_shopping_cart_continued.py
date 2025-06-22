@@ -8,8 +8,9 @@
 
 class ItemToPurchase():
     # Default class constructor
-    def __init__(self, item_name='none', item_price=0.0, item_quantity=0):
+    def __init__(self, item_name='none', item_description='', item_price=0.0, item_quantity=0):
         self.item_name = item_name
+        self.item_description = item_description
         self.item_price = item_price
         self.item_quantity = item_quantity
 
@@ -70,13 +71,18 @@ class OnlineShoppingCart():
         if ItemToPurchase.item_name not in ItemToPurchase.cart_items:
             print(f'Item not found in cart. Nothing modified.')
         else:
-            pass # check if parameter has default values for description, price, and quantity. If not, modify item in cart.
-
-
+            # check if parameter has default values for description, price, and quantity. 
+            # If not, modify item in cart.
+            if ItemToPurchase.item_description != 'none':
+                ItemToPurchase.item_description = 'none' 
+            elif ItemToPurchase.item_price != 0.0:
+                ItemToPurchase.item_price = 0.0
+            elif ItemToPurchase.item_quantity != 0:
+                ItemToPurchase.item_quantity = 0
+ 
     # Get num items in cart method
     def get_num_items_in_cart(self):
         return len(self.cart_items)
-
 
     # Get cost of cart method
     def get_cost_of_cart(self):
@@ -85,12 +91,29 @@ class OnlineShoppingCart():
 
     # Print total method
     def print_total(self):
-        pass
+        # Outputs total of objects in cart.
+        # If cart is empty, output this message: SHOPPING CART IS EMPTY           
+        if self.get_num_items_in_cart() == 0:
+            print(f'SHOPPING CART IS EMPTY')
+        else:
+            print(f"{self.customer_name}'s Shopping Cart - {self.current_date}")
+            print(f'Number of Items: {self.get_num_items_in_cart()}')
+            total_cost = 0
+            for item in self.cart_items:
+                item_total_cost = item.item_quantity * item.item_cost)
+                print(f'{item.item_name} {item.item_quantity} @{item.item_cost} = ${item_total_cost}')
+                total_cost += item_total_cost            
+            print(f'Total: ${total_cost}')
+
 
     # Print descriptions method
+    
     def print_descriptions(self):
-        pass
-
+        print(f"{self.customer_name}'s Shopping Cart - {self.current_date}")
+        print(f'Item Descriptions')
+        for item in self.cart_items:
+            print(f'{item.item_name}: {item.item_description}')
+        
 
 #############################################
 # STEP 5
