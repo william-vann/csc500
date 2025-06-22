@@ -6,9 +6,9 @@
 #############################################
 # Define class for item purchase
 
-class ItemToPurchase():
+class ItemToPurchase:
     # Default class constructor
-    def __init__(self, item_name='none', item_description='', item_price=0.0, item_quantity=0):
+    def __init__(self, item_name='none', item_description='none', item_price=0.0, item_quantity=0):
         self.item_name = item_name
         self.item_description = item_description
         self.item_price = item_price
@@ -19,19 +19,7 @@ class ItemToPurchase():
         self.transaction_cost = self.item_price * self.item_quantity
         print(f'{self.item_name} {self.item_quantity} @ ${self.item_price:.2f} = ${self.transaction_cost:.2f}')
 
-#############################################
-# STEP 2
-#############################################
-# Function to gather user inputs
-def get_user_input():
-    item_name = str(input('Enter the item name: \n'))
-    item_price = float(input('Enter the item price: \n'))
-    item_quantity = int(input('Enter the item quantity: \n'))
-    return item_name, item_price, item_quantity
 
-# Create 2 objects from ItemToPurchase class, unpack user inputs
-# item1 = ItemToPurchase(*get_user_input())
-# item2 = ItemToPurchase(*get_user_input())
 
 
 #############################################
@@ -48,7 +36,7 @@ def get_user_input():
 #############################################
 # Define class for shopping cart
 
-class OnlineShoppingCart():
+class ShoppingCart:
     # Default class constructor
     def __init__(self, customer_name='none', current_date='January 1, 2020'):
         self.customer_name = customer_name
@@ -59,8 +47,9 @@ class OnlineShoppingCart():
     def add_item(self, ItemToPurchase):
         self.cart_items.append(ItemToPurchase)
 
+
     # Remove item method
-    def remove_item(self, ItemToPurchase):
+    def remove_item(self, ItemToPurchase.item_name):
         if ItemToPurchase.item_name not in self.cart_items:
             print(f'Item not found in cart. Nothing removed.')
         else:
@@ -115,14 +104,6 @@ class OnlineShoppingCart():
             print(f'{item.item_name}: {item.item_description}')
         
 
-#############################################
-# STEP 5
-#############################################
-
-# Implement print_menu() function
-
-def print_menu(OnlineShoppingCart):
-    pass
 
 
 
@@ -132,13 +113,66 @@ def print_menu(OnlineShoppingCart):
 
 # Implement output_shopping_cart__menu() function
 
-def output_shopping_cart_menu(OnlineShoppingCart):
+def output_shopping_cart_menu(ShoppingCart):
     pass
+
+
 
 #############################################
 # MAIN
 #############################################
 
 def main():
-    pass
+    #############################################
+    # STEP 2
+    #############################################
+    # Function to gather user inputs
+    def get_user_input():
+        item_name = str(input('Enter the item name: \n'))
+        item_price = float(input('Enter the item price: \n'))
+        item_quantity = int(input('Enter the item quantity: \n'))
+        return item_name, item_price, item_quantity
 
+    # Create 2 objects from ItemToPurchase class, unpack user inputs
+    # item1 = ItemToPurchase(*get_user_input())
+    # item2 = ItemToPurchase(*get_user_input())
+
+    #############################################
+    # STEP 5
+    #############################################
+
+    # Implement print_menu() function
+
+    def print_menu(ShoppingCart):
+        while True:
+            print(f'MENU')
+            print(f'a - Add item to cart')
+            print(f'r - Remove item from cart')
+            print(f'c - Change item quantity')
+            print(f"i - Output items' descriptions")
+            print(f'o - Output shopping cart')
+            print(f'q - Quit')
+            menu_choice = input('Choose an option:\n').str.lower()
+            
+            if menu_choice == 'q':
+                break
+            elif menu_choice == 'a':
+                add_item(ShoppingCart)
+            elif menu_choice == 'r':
+                remove_item(ShoppingCart)
+            elif menu_choice == 'c':
+                modify_item(ShoppingCart)
+            elif menu_choice == 'i':
+                print_descriptions(ShoppingCart)
+            elif menu_choice == 'o':
+                output_shopping_cart_menu(ShoppingCart)
+            else:
+                continue
+
+    print_menu(ShoppingCart)
+
+
+#################################
+if __name__ == '__main__':
+    main()
+#################################
