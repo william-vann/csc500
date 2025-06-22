@@ -1,178 +1,181 @@
 # Module 6 Portfolio Milestone
 # CSC500 William Vann
 
-#############################################
-# STEP 1
-#############################################
-# Define class for item purchase
+####################
+# ITEM TO PURCHASE #
+####################
+
+# Define ItemToPurchase class
+# this represents the items added to shopping cart
 
 class ItemToPurchase:
-    # Default class constructor
-    def __init__(self, item_name='none', item_description='none', item_price=0.0, item_quantity=0):
-        self.item_name = item_name
-        self.item_description = item_description
-        self.item_price = item_price
-        self.item_quantity = item_quantity
+   
+    def __init__(self, name='none', price=0.0, quantity=0, description='none'):
+        self.name = str(name)
+        self.price = float(price)
+        self.quantity = int(quantity)
+        self.description = str(description)
 
-    # Print item cost method
     def print_item_cost(self):
-        self.transaction_cost = self.item_price * self.item_quantity
-        print(f'{self.item_name} {self.item_quantity} @ ${self.item_price:.2f} = ${self.transaction_cost:.2f}')
+        total_item_cost = round((self.price * self.quantity))
+        print(f'{self.name} {self.quantity} @ ${self.price} = ${total_item_cost}')
 
+#################
+# SHOPPING CART #
+#################
 
-
-
-#############################################
-# STEP 3
-#############################################
-# Output results
-# print(f'TOTAL COST')
-# item1.print_item_cost()
-# item2.print_item_cost()
-# print(f'Total: ${(item1.transaction_cost + item2.transaction_cost):.2f}')
-
-#############################################
-# STEP 4
-#############################################
-# Define class for shopping cart
+# Define ShoppingCart class
+# this represents the record of customer shopping on a particular date
 
 class ShoppingCart:
-    # Default class constructor
-    def __init__(self, customer_name='none', current_date='January 1, 2020'):
-        self.customer_name = customer_name
-        self.current_date = current_date
-        self.cart_items = []
 
-    # Add item method
-    def add_item(self, ItemToPurchase):
-        self.cart_items.append(ItemToPurchase)
+    def __init__(self, name='none', date='January 1, 2020'):
+        self.name = str(name)
+        self.date = str(date)
+        self.cart = []
 
+    def add_item(self, item_object):
+        # print(f'Adding item object to cart list')
+        self.cart.append(item_object)
 
-    # Remove item method
-    def remove_item(self, ItemToPurchase.item_name):
-        if ItemToPurchase.item_name not in self.cart_items:
-            print(f'Item not found in cart. Nothing removed.')
-        else:
-            self.cart_items.remove(ItemToPurchase.item_name)
+    def remove_item(self, item_name):
+        # print(f'Removing item name object from cart list')
+        for item in self.cart:
+            if item.name == item_name:
+                self.cart.remove(item)
+                return
+        print(f'Item not found in cart. Nothing removed.')
 
-    # Modify item method
-    def modify_item(self, ItemToPurchase):
-        if ItemToPurchase.item_name not in ItemToPurchase.cart_items:
-            print(f'Item not found in cart. Nothing modified.')
-        else:
-            # check if parameter has default values for description, price, and quantity. 
-            # If not, modify item in cart.
-            if ItemToPurchase.item_description != 'none':
-                ItemToPurchase.item_description = 'none' 
-            elif ItemToPurchase.item_price != 0.0:
-                ItemToPurchase.item_price = 0.0
-            elif ItemToPurchase.item_quantity != 0:
-                ItemToPurchase.item_quantity = 0
- 
-    # Get num items in cart method
+    def modify_item(self, item_name):
+        # print(f'Modifying item name object in cart list')
+        for item in self.cart:
+            if item.name == item_name:
+                new_name = item_name
+                new_price = float(input(f'Enter new price:\n'))
+                new_quantity = int(input(f'Enter new quantity:\n'))
+                new_description = str(input(f'Enter new description:\n')) 
+
+                self.cart.remove(item)                              
+                new_item_object = ItemToPurchase(new_name, new_price, new_quantity, new_description)
+                
+                self.cart.append(new_item_object)
+                return
+        print(f'Item not found in cart. Nothing modified.')
+
     def get_num_items_in_cart(self):
-        return len(self.cart_items)
-
-    # Get cost of cart method
-    def get_cost_of_cart(self):
-        cost_of_cart = [(item.price*item.quantity) for item in self.cart_items]
-        return '{:.2f}'.format(sum(cost_of_cart))
-
-    # Print total method
-    def print_total(self):
-        # Outputs total of objects in cart.
-        # If cart is empty, output this message: SHOPPING CART IS EMPTY           
-        if self.get_num_items_in_cart() == 0:
-            print(f'SHOPPING CART IS EMPTY')
-        else:
-            print(f"{self.customer_name}'s Shopping Cart - {self.current_date}")
-            print(f'Number of Items: {self.get_num_items_in_cart()}')
-            total_cost = 0
-            for item in self.cart_items:
-                item_total_cost = item.item_quantity * item.item_cost)
-                print(f'{item.item_name} {item.item_quantity} @{item.item_cost} = ${item_total_cost}')
-                total_cost += item_total_cost            
-            print(f'Total: ${total_cost}')
-
-
-    # Print descriptions method
+        total_quantity = 0
+        for item in self.cart:
+            total_quantity += item.quantity
+        return total_quantity
     
+    def get_cost_of_cart(self):
+        total_cost = 0.0
+        for item in self.cart:
+            total_cost += (item.quantity * item.price)
+        return round(total_cost)
+    
+    def print_total(self):
+        if self.cart:
+            print(f"{self.name}'s Shopping Cart - {self.date}")
+            print(f'Number of items: {self.get_num_items_in_cart()}')
+            for item in self.cart:
+                print(f'{item.name} {item.quantity} @ ${item.price} = ${item.quantity * item.price}')
+            print(f'Total: ${self.get_cost_of_cart()}')
+        else:
+            print(f'SHOPPING CART IS EMPTY')
+
     def print_descriptions(self):
-        print(f"{self.customer_name}'s Shopping Cart - {self.current_date}")
-        print(f'Item Descriptions')
-        for item in self.cart_items:
-            print(f'{item.item_name}: {item.item_description}')
+        if self.cart:
+            print(f"OUTPUT ITEMS' DESCRIPTIONS")
+            print(f"{self.name}'s Shopping Cart - {self.date}")
+            print(f'Item Descriptions')
+            for item in self.cart:
+                print(f'{item.name}: {item.description}')            
+        else:
+            print(f'SHOPPING CART IS EMPTY')
+
+    def output_shopping_cart(self):
+        if self.cart:
+            print(f'OUTPUT SHOPPING CART')
+            print(f"{self.name}'s Shopping Cart - {self.date}")
+            print(f'Number of Items: {self.get_num_items_in_cart()}')
+            for item in self.cart:
+                item.print_item_cost()     
+            print(f'Total: ${self.get_cost_of_cart()}')       
+        else:
+            print(f'SHOPPING CART IS EMPTY')
+
+
+#########################
+
+# main user interaction menu
+
+def print_menu(NewCart):
+    choice = ''
+    while True:
+        print()
+        print(f'====================================')
+        print(f'                MENU                ')
+        print(f'====================================')
+        print(f'    a - Add item to cart            ')
+        print(f'    r - Remove item from cart       ')
+        print(f'    c - Change item quantity        ')
+        print(f"    i - Output items' descriptions. ")
+        print(f'    o - Output shopping cart.       ')  
+        print(f'    q - Quit                        ')
+        print(f'====================================')
+        print()
+        choice = input(f'Choose an option:\n')
         
+        if choice == 'q':
+            break
 
+        elif choice == 'a':
+            print()
+            item_name = str(input('Enter the item name: \n'))
+            item_price = float(input('Enter the item price: \n'))
+            item_quantity = int(input('Enter the item quantity: \n'))
+            item_description = str(input('Enter the item description: \n'))
+            print()
 
-
-
-#############################################
-# STEP 6
-#############################################
-
-# Implement output_shopping_cart__menu() function
-
-def output_shopping_cart_menu(ShoppingCart):
-    pass
-
-
-
-#############################################
-# MAIN
-#############################################
-
-def main():
-    #############################################
-    # STEP 2
-    #############################################
-    # Function to gather user inputs
-    def get_user_input():
-        item_name = str(input('Enter the item name: \n'))
-        item_price = float(input('Enter the item price: \n'))
-        item_quantity = int(input('Enter the item quantity: \n'))
-        return item_name, item_price, item_quantity
-
-    # Create 2 objects from ItemToPurchase class, unpack user inputs
-    # item1 = ItemToPurchase(*get_user_input())
-    # item2 = ItemToPurchase(*get_user_input())
-
-    #############################################
-    # STEP 5
-    #############################################
-
-    # Implement print_menu() function
-
-    def print_menu(ShoppingCart):
-        while True:
-            print(f'MENU')
-            print(f'a - Add item to cart')
-            print(f'r - Remove item from cart')
-            print(f'c - Change item quantity')
-            print(f"i - Output items' descriptions")
-            print(f'o - Output shopping cart')
-            print(f'q - Quit')
-            menu_choice = input('Choose an option:\n').str.lower()
+            # create ItemToPurchase object
+            item_object = ItemToPurchase(item_name, item_price, item_quantity, item_description)
             
-            if menu_choice == 'q':
-                break
-            elif menu_choice == 'a':
-                add_item(ShoppingCart)
-            elif menu_choice == 'r':
-                remove_item(ShoppingCart)
-            elif menu_choice == 'c':
-                modify_item(ShoppingCart)
-            elif menu_choice == 'i':
-                print_descriptions(ShoppingCart)
-            elif menu_choice == 'o':
-                output_shopping_cart_menu(ShoppingCart)
-            else:
-                continue
+            # add to ShoppingCart
+            NewCart.add_item(item_object)
 
-    print_menu(ShoppingCart)
+        elif choice == 'r':
+            item_name = input(f'Enter item name:\n')
+            NewCart.remove_item(item_name)
 
+        elif choice == 'c':
+            print()
+            item_name = input(f'Enter item name:\n')
+            print()
+            NewCart.modify_item(item_name)
 
-#################################
-if __name__ == '__main__':
-    main()
-#################################
+        elif choice == 'i':
+            print()
+            NewCart.print_descriptions()
+
+        elif choice == 'o':
+            print()
+            NewCart.output_shopping_cart()
+        
+        else:
+            print()
+            print(f'Please enter a valid choice.')
+            choice = ''
+
+############################   
+   
+if __name__ == "__main__":
+
+    # Create new shopping cart and call menu function
+
+    customer_name = input(f'Customer name:\n')
+    current_date = input(f'Enter current date:\n')
+
+    newCustomerCart = ShoppingCart(customer_name, current_date)
+
+    print_menu(newCustomerCart)
