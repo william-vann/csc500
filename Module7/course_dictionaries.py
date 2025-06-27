@@ -27,7 +27,7 @@ meeting_time_dict = {
     'COM241': '1:00 p.m.'
 }
 
-# test keys in dicts are all the same
+# test that keys in dicts are all the same
 
 all_keys_match = (list(room_number_dict.keys()) == list(instructor_dict.keys()) == list(meeting_time_dict.keys()))
 
@@ -51,6 +51,8 @@ while input_val != 'Q':
 
     input_val = input('Enter a valid course number (e.g. CSC101) or Q to quit:\n')
 
+    # test for valid course number input 
+    
     if input_val in shared_keys_list:
 
         # format output string
