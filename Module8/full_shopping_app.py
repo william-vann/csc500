@@ -17,7 +17,7 @@ def get_user_input():
         except (ValueError, TypeError):
             print('Could not parse item information. Try again!')
             
-# # Output results
+# Output results
 def print_total_cost(item1, item2):
     print(f'\nTOTAL COST')
     print('=' * 50)
