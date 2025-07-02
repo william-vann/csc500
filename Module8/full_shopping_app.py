@@ -59,7 +59,7 @@ class ShoppingCart:
         self.cart = []
 
     def add_item(self, item_object): 
-       
+       # TODO try to prevent adding dupes
         if item_object in self.cart:
             print(f'{item_object.name} ALREADY IN CART.')
             return
@@ -157,6 +157,8 @@ class ShoppingCart:
 # MAIN USER INTERACTION MENU #
 ##############################
 
+# Main menu loop
+
 def print_menu(NewCart):
     choice = ''
     while True:
@@ -174,9 +176,12 @@ def print_menu(NewCart):
         print()
         choice = input(f'Choose an option:\n')
         
+        # quit logic 
         if choice == 'q':
             break
 
+
+        # add item logic
         elif choice == 'a':
             print('=' * 50)
             
@@ -186,24 +191,29 @@ def print_menu(NewCart):
             # add to ShoppingCart
             NewCart.add_item(item_object)
 
+        # remove item logic
         elif choice == 'r':
             print('=' * 50)
             item_name = input(f'Enter item name:\n')
             NewCart.remove_item(item_name)
 
+        # change quantity logic
         elif choice == 'c':
             print('=' * 50)
             item_name = input(f'Enter item name:\n')
             NewCart.modify_item(item_name)
-            
+
+        # print item descriptions    
         elif choice == 'i':
             print()
             NewCart.print_descriptions()
 
+        # output shopping cart
         elif choice == 'o':
             print()
             NewCart.output_shopping_cart()
-        
+
+        # error check
         else:
             print()
             print(f'PLEASE ENTER A VALID CHOICE!\n')
