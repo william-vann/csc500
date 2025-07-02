@@ -5,8 +5,7 @@
 # Function to gather user inputs
 def get_user_input():
     print('=' * 50)
-    while True:
-        
+    while True:        
         try:
             item_name = str(input('Enter the item name: \n'))
             item_price = float(input('Enter the item price: \n'))
@@ -59,9 +58,14 @@ class ShoppingCart:
         self.date = str(date)
         self.cart = []
 
-    def add_item(self, item_object):       
-        self.cart.append(item_object)
-        print(f'{item_object.name} ADDED SUCCESSFULLY.')
+    def add_item(self, item_object): 
+       
+        if item_object in self.cart:
+            print(f'{item_object.name} ALREADY IN CART.')
+            return
+        else:   
+            self.cart.append(item_object)
+            print(f'{item_object.name} ADDED SUCCESSFULLY.')
 
     def remove_item(self, item_name):
         for item in self.cart:
@@ -77,9 +81,13 @@ class ShoppingCart:
                 new_name = item_name
                 new_price = item.price
                 new_quantity = int(input(f'Enter new quantity:\n'))
+
                 if new_quantity == 0:
                     self.cart.remove(item)
                     print(f'{item.name} REMOVED SUCCESSFULLY.')
+                    return
+                elif new_quantity == item.quantity:
+                    print(f'SAME QUANTITY. NOTHING MODIFIED.')
                     return
                 else:
                     new_description = item.description 
@@ -99,7 +107,7 @@ class ShoppingCart:
         return total_quantity
     
     def get_cost_of_cart(self):
-        total_cost = 0.0
+        total_cost = 0.00
         for item in self.cart:
             total_cost += (item.quantity * item.price)
         return f'{total_cost:.2f}'
@@ -132,8 +140,6 @@ class ShoppingCart:
 
     def output_shopping_cart(self):
         if self.cart:
-            # print('=' * 50)
-            # print(f'OUTPUT SHOPPING CART')
             print('=' * 50)
             print(f"{self.name}'s SHOPPING CART - {self.date}")
             print('=' * 50)
@@ -147,10 +153,9 @@ class ShoppingCart:
         else:
             print(f'SHOPPING CART IS EMPTY\n')
 
-
-#########################
-
-# main user interaction menu
+##############################
+# MAIN USER INTERACTION MENU #
+##############################
 
 def print_menu(NewCart):
     choice = ''
@@ -204,7 +209,7 @@ def print_menu(NewCart):
             print(f'PLEASE ENTER A VALID CHOICE!\n')
             choice = ''
 
-############################   
+####################################   
    
 if __name__ == "__main__":
 
