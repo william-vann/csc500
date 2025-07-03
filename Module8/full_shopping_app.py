@@ -59,13 +59,12 @@ class ShoppingCart:
         self.cart = []
 
     def add_item(self, item_object): 
-       # TODO try to prevent adding dupes
-        if item_object in self.cart:
-            print(f'{item_object.name} ALREADY IN CART.')
-            return
-        else:   
-            self.cart.append(item_object)
-            print(f'{item_object.name} ADDED SUCCESSFULLY.')
+        for item in self.cart:
+            if item.name == item_object.name:                
+                print(f'{item.name} ALREADY IN CART. DELETE FIRST.')
+                return            
+        self.cart.append(item_object)
+        print(f'{item_object.name} ADDED SUCCESSFULLY.')
 
     def remove_item(self, item_name):
         for item in self.cart:
